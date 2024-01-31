@@ -1,12 +1,16 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { HotelFormData } from "@/common/types/hotel";
+import { HotelFormData, manageHotelFormProps } from "@/common/types/hotel";
 import { DetailsSection } from "./DetailsSection";
 import { HotelTypeSection } from "./HotelTypeSection";
 import { FacilitiesSection } from "./FacilitiesSection";
 import { GuestsSection } from "./GuestsSection";
 import { ImagesSection } from "./ImagesSection";
 
-export const ManageHotelForm = () => {
+export const ManageHotelForm = ({
+  onSave,
+  isLoading,
+  hotel,
+}: manageHotelFormProps) => {
   const formMethods = useForm<HotelFormData>();
   const { handleSubmit, reset } = formMethods;
 
@@ -32,6 +36,8 @@ export const ManageHotelForm = () => {
     Array.from(formDataJson.imageFiles).forEach((imageFile) => {
       formData.append(`imageFiles`, imageFile);
     });
+
+    onSave(formData);
   });
   return (
     <FormProvider {...formMethods}>
@@ -43,10 +49,11 @@ export const ManageHotelForm = () => {
         <ImagesSection />
         <span className="flex justify-end">
           <button
+            disabled={isLoading}
             type="submit"
             className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl disabled:bg-gray-500"
           >
-            Save
+            {isLoading ? "Saving..." : "Save"}
           </button>
         </span>
       </form>
