@@ -1,5 +1,4 @@
 import { HotelFormData } from "@/common/types/hotel";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 
 export const DetailsSection = () => {

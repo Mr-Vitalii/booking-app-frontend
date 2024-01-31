@@ -9,10 +9,9 @@ import { ImagesSection } from "./ImagesSection";
 export const ManageHotelForm = ({
   onSave,
   isLoading,
-  hotel,
 }: manageHotelFormProps) => {
   const formMethods = useForm<HotelFormData>();
-  const { handleSubmit, reset } = formMethods;
+  const { handleSubmit } = formMethods;
 
   const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
     console.log(formDataJson);
