@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { AiFillStar } from "react-icons/ai";
 import { HotelType } from "@/common/types/hotel";
+
 type Props = {
   hotel: HotelType;
 };
@@ -10,7 +12,7 @@ export const SearchResultsCard = ({ hotel }: Props) => {
     <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8">
       <div className="w-full h-[300px]">
         <img
-          src={hotel.imageUrls[0]}
+          src={hotel.imageUrls[0] || "/No_image_available.svg"}
           className="w-full h-full object-cover object-center"
         />
       </div>
@@ -18,8 +20,10 @@ export const SearchResultsCard = ({ hotel }: Props) => {
         <div>
           <div className="flex items-center">
             <span className="flex">
-              {Array.from({ length: hotel.starRating }).map(() => (
-                <AiFillStar className="fill-yellow-400" />
+              {Array.from({ length: hotel.starRating }).map((_, index) => (
+                <span key={index}>
+                  <AiFillStar className="fill-yellow-400" />
+                </span>
               ))}
             </span>
             <span className="ml-1 text-sm">{hotel.type}</span>
@@ -40,7 +44,10 @@ export const SearchResultsCard = ({ hotel }: Props) => {
           <div className="font-bold mb-4">${hotel.pricePerNight} per night</div>
           <div className="flex gap-1 items-center mb-4">
             {hotel.facilities.slice(0, 3).map((facility) => (
-              <span className="bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap">
+              <span
+                key={uuidv4()}
+                className="bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap"
+              >
                 {facility}
               </span>
             ))}

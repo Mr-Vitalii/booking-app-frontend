@@ -1,3 +1,4 @@
+import { Pagination } from "@/components/Pagination";
 import { SearchResultsCard } from "@/components/SearchResultsCard";
 import { useSearchContext } from "@/contexts/SearchContext";
 import { useState } from "react";
@@ -39,9 +40,21 @@ export const Search = () => {
           </span>
           {/* TODO sort option */}
         </div>
-        {hotelData?.data.map((hotel) => (
-          <SearchResultsCard hotel={hotel} />
-        ))}
+        <ul>
+          {hotelData?.data.map((hotel) => (
+            <li key={hotel._id}>
+              <SearchResultsCard hotel={hotel} />
+            </li>
+          ))}
+        </ul>
+
+        <div>
+          <Pagination
+            page={hotelData?.pagination.page || 1}
+            pages={hotelData?.pagination.pages || 1}
+            onPageChange={(page) => setPage(page)}
+          />
+        </div>
       </div>
     </div>
   );
