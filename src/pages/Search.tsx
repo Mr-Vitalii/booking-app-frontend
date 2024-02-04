@@ -15,11 +15,6 @@ export const Search = () => {
     adultCount: search.adultCount.toString(),
     childCount: search.childCount.toString(),
     page: page.toString(),
-    // stars: selectedStars,
-    // types: selectedHotelTypes,
-    // facilities: selectedFacilities,
-    // maxPrice: selectedPrice?.toString(),
-    // sortOption,
   };
 
   const { data: hotelData } = useQuery(["searchHotels", searchParams], () =>
