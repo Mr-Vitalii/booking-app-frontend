@@ -28,3 +28,13 @@ export type PaginationProps = {
   pages: number;
   onPageChange: (page: number) => void;
 };
+
+export type StarRatingFilterProps = {
+  selectedStars: string[];
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type HotelTypesFilterProps = {
+  selectedHotelTypes: string[];
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
