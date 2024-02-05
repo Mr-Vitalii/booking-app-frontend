@@ -1,5 +1,7 @@
+import { FacilitiesFilter } from "@/components/FacilitiesFilter";
 import { HotelTypesFilter } from "@/components/HotelTypesFilter";
 import { Pagination } from "@/components/Pagination";
+import { PriceFilter } from "@/components/PriceFilter";
 import { SearchResultsCard } from "@/components/SearchResultsCard";
 import { StarRatingFilter } from "@/components/StarRatingFilter";
 import { useSearchContext } from "@/contexts/SearchContext";
@@ -13,6 +15,8 @@ export const Search = () => {
   const [page, setPage] = useState<number>(1);
   const [selectedStars, setSelectedStars] = useState<string[]>([]);
   const [selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
+  const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
+  const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
 
   const searchParams = {
     destination: search.destination,
@@ -23,6 +27,8 @@ export const Search = () => {
     page: page.toString(),
     stars: selectedStars,
     types: selectedHotelTypes,
+    facilities: selectedFacilities,
+    maxPrice: selectedPrice?.toString(),
   };
 
   const { data: hotelData } = useQuery(["searchHotels", searchParams], () =>
@@ -51,6 +57,16 @@ export const Search = () => {
     );
   };
 
+  const handleFacilityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const facility = event.target.value;
+
+    setSelectedFacilities((prevFacilities) =>
+      event.target.checked
+        ? [...prevFacilities, facility]
+        : prevFacilities.filter((prevFacility) => prevFacility !== facility)
+    );
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
       <div className="rounded-lg border border-slate-300 h-fit sticky top-10">
@@ -65,6 +81,14 @@ export const Search = () => {
           <HotelTypesFilter
             selectedHotelTypes={selectedHotelTypes}
             onChange={handelHotelTypeChange}
+          />
+          <FacilitiesFilter
+            selectedFacilities={selectedFacilities}
+            onChange={handleFacilityChange}
+          />
+          <PriceFilter
+            selectedPrice={selectedPrice}
+            onChange={(value?: number) => setSelectedPrice(value)}
           />
         </div>
       </div>

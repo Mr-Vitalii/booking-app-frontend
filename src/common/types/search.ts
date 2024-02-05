@@ -38,3 +38,13 @@ export type HotelTypesFilterProps = {
   selectedHotelTypes: string[];
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
+export type FacilitiesFilterProps = {
+  selectedFacilities: string[];
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type PriceFilterProps = {
+  selectedPrice?: number;
+  onChange: (value?: number) => void;
+};
