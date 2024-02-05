@@ -1,4 +1,5 @@
 import { PriceFilterProps } from "@/common/types/search";
+import { v4 as uuidv4 } from "uuid";
 
 export const PriceFilter = ({ selectedPrice, onChange }: PriceFilterProps) => {
   return (
@@ -15,7 +16,9 @@ export const PriceFilter = ({ selectedPrice, onChange }: PriceFilterProps) => {
       >
         <option value="">Select Max Price</option>
         {[50, 100, 200, 300, 500].map((price) => (
-          <option value={price}>{price}</option>
+          <option key={uuidv4()} value={price}>
+            {price}
+          </option>
         ))}
       </select>
     </div>
