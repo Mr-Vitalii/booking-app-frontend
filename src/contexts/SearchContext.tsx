@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import * as React from "react";
+import { useContext, useState } from "react";
 import { SearchContext } from "../common/types/context";
 
 const SearchContext = React.createContext<SearchContext | undefined>(undefined);

@@ -1,3 +1,5 @@
+import { PriceFilterProps } from "@/common/types/search";
+
 export const PriceFilter = ({ selectedPrice, onChange }: PriceFilterProps) => {
   return (
     <div>

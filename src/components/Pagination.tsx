@@ -1,5 +1,4 @@
 import { PaginationProps } from "@/common/types/search";
-import React from "react";
 
 export const Pagination = ({ page, pages, onPageChange }: PaginationProps) => {
   const pageNumbers = [];
