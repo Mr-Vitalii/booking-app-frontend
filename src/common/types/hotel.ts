@@ -1,3 +1,5 @@
+import { BookingType } from "./booking";
+
 export type HotelFormData = {
   name: string;
   city: string;
