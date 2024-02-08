@@ -3,12 +3,20 @@ import { UserType } from "./user";
 
 export type BookingFormProps = {
   currentUser: UserType;
+  paymentIntent: PaymentIntentResponse;
 };
 
 export type BookingFormData = {
   firstName: string;
   lastName: string;
   email: string;
+  adultCount: number;
+  childCount: number;
+  checkIn: string;
+  checkOut: string;
+  hotelId: string;
+  paymentIntentId: string;
+  totalCost: number;
 };
 
 export type BookingDetailsSummaryProps = {
@@ -18,4 +26,10 @@ export type BookingDetailsSummaryProps = {
   childCount: number;
   numberOfNights: number;
   hotel: HotelType;
+};
+
+export type PaymentIntentResponse = {
+  paymentIntentId: string;
+  clientSecret: string;
+  totalCost: number;
 };
