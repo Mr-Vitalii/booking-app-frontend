@@ -1,3 +1,5 @@
+import { BookingType } from "./booking";
+
 export type HotelFormData = {
   name: string;
   city: string;
@@ -28,6 +30,7 @@ export type HotelType = {
   starRating: number;
   imageUrls: string[];
   lastUpdated: Date;
+  bookings: BookingType[];
 };
 
 export type manageHotelFormProps = {
