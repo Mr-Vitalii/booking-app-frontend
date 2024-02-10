@@ -57,8 +57,8 @@ export const ImagesSection = () => {
                 return "At least one image should be added";
               }
 
-              if (totalLength > 6) {
-                return "Total number of images cannot be more than 6";
+              if (totalLength > 10) {
+                return "Total number of images cannot be more than 10";
               }
 
               return true;
