@@ -18,7 +18,7 @@ export const MyBookings = () => {
         {hotels.map((hotel) => (
           <li
             key={uuidv4()}
-            className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] border border-slate-300 rounded-lg p-8 gap-5"
+            className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] border border-sky-600 rounded-lg p-8 gap-5"
           >
             <div className="lg:w-full lg:h-[250px]">
               <img

@@ -20,8 +20,8 @@ export const HotelTypeSection = () => {
             key={type}
             className={
               typeWatch === type
-                ? "cursor-pointer bg-blue-300 text-xs text-center rounded-full px-4 py-2 font-semibold md:text-sm"
-                : "cursor-pointer bg-gray-300 text-xs text-center rounded-full px-4 py-2 font-semibold md:text-sm"
+                ? "cursor-pointer bg-sky-500 text-white text-xs text-center rounded-full px-4 py-2 font-semibold md:text-sm"
+                : "cursor-pointer bg-white text-xs text-center rounded-full px-4 py-2 font-semibold md:text-sm"
             }
           >
             <input

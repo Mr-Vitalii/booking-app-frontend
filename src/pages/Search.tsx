@@ -71,9 +71,9 @@ export const Search = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-      <div className="rounded-lg border border-slate-300 h-fit sticky top-10">
+      <div className="rounded-lg border border-sky-600 bg-sky-100 h-fit sticky top-10">
         <div className="space-y-5 p-3">
-          <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
+          <h3 className="text-lg font-semibold border-b border-sky-600 pb-5">
             Filter by:
           </h3>
           <StarRatingFilter
@@ -117,7 +117,7 @@ export const Search = () => {
         </div>
         <ul>
           {hotelData?.data.map((hotel) => (
-            <li key={hotel._id}>
+            <li key={hotel._id} className="mb-3">
               <SearchResultsCard hotel={hotel} />
             </li>
           ))}

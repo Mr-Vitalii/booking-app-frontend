@@ -9,7 +9,7 @@ type Props = {
 
 export const SearchResultsCard = ({ hotel }: Props) => {
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] bg-sky-100 border border-sky-600 rounded-lg p-8 gap-8">
       <div className="w-full h-[300px]">
         <img
           src={hotel.imageUrls[0] || "/No_image_available.svg"}
@@ -46,7 +46,7 @@ export const SearchResultsCard = ({ hotel }: Props) => {
             {hotel.facilities.slice(0, 3).map((facility) => (
               <span
                 key={uuidv4()}
-                className="bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap"
+                className="bg-sky-600 text-white p-2 rounded-lg font-bold text-xs whitespace-nowrap"
               >
                 {facility}
               </span>
@@ -59,7 +59,7 @@ export const SearchResultsCard = ({ hotel }: Props) => {
           <div className="flex">
             <Link
               to={`/detail/${hotel._id}`}
-              className="bg-blue-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-blue-500"
+              className="bg-sky-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-sky-500"
             >
               View More
             </Link>

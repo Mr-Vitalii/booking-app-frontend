@@ -2,7 +2,12 @@ import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
 
-export const SignOutButton = () => {
+type Props = {
+  fontSize?: string;
+  toggleMenu?: () => void;
+};
+
+export const SignOutButton = ({ fontSize, toggleMenu }: Props) => {
   const queryClient = useQueryClient();
   const { showToast } = useAppContext();
 
@@ -17,13 +22,16 @@ export const SignOutButton = () => {
   });
 
   const handleClick = () => {
+    if (toggleMenu) {
+      toggleMenu();
+    }
     mutation.mutate();
   };
 
   return (
     <button
       onClick={handleClick}
-      className="text-blue-600 px-3 font-bold bg-white hover:bg-gray-100 "
+      className={`py-3 px-6 text-${fontSize} text-sky-600 font-bold bg-white hover:bg-sky-100`}
     >
       Sign Out
     </button>

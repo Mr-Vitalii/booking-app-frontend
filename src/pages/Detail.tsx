@@ -47,17 +47,14 @@ export const Detail = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
         {hotel.facilities.map((facility) => (
-          <div
-            key={uuidv4()}
-            className="border border-slate-300 rounded-sm p-3"
-          >
+          <div key={uuidv4()} className="border border-sky-600 rounded-sm p-3">
             {facility}
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr]">
-        <div className="whitespace-pre-line">{hotel.description}</div>
+        <div className="whitespace-pre-line mb-4">{hotel.description}</div>
         <div className="h-fit">
           <GuestInfoForm
             pricePerNight={hotel.pricePerNight}

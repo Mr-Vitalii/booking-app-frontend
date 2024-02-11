@@ -62,7 +62,7 @@ export const GuestInfoForm = ({
   };
 
   return (
-    <div className="flex flex-col p-4 bg-blue-200 gap-4">
+    <div className="flex flex-col p-4 bg-sky-500 gap-4">
       <h3 className="text-md font-bold">${pricePerNight}</h3>
       <form
         onSubmit={
@@ -137,11 +137,11 @@ export const GuestInfoForm = ({
             )}
           </div>
           {isLoggedIn ? (
-            <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
+            <button className="bg-sky-700 text-white h-full p-2 font-bold hover:bg-sky-800 text-xl">
               Book Now
             </button>
           ) : (
-            <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
+            <button className="bg-sky-700 text-white h-full p-2 font-bold hover:bg-sky-800 text-xl">
               Sign in to Book
             </button>
           )}

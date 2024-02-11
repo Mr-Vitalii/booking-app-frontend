@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MdTravelExplore } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,6 +9,9 @@ import { useSearchContext } from "@/contexts/SearchContext";
 export const SearchBar = () => {
   const search = useSearchContext();
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const currentUrl = location.pathname;
 
   const [destination, setDestination] = useState<string>(search.destination);
   const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
@@ -40,10 +43,12 @@ export const SearchBar = () => {
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
+
+  if (currentUrl === "/sign-in" || currentUrl === "/register") return <></>;
   return (
     <form
       onSubmit={handleSubmit}
-      className="-mt-8 p-3 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
+      className="-mt-8 p-3 bg-amber-400 rounded shadow-md grid grid-cols-1 items-center gap-4 lg:grid-cols-2 2xl:grid-cols-5"
     >
       <div className="flex flex-row items-center flex-1 bg-white p-2">
         <MdTravelExplore size={25} className="mr-2" />
@@ -56,7 +61,7 @@ export const SearchBar = () => {
         />
       </div>
 
-      <div className="flex bg-white px-2 py-1 gap-2">
+      <div className="flex bg-white px-2 py-1 justify-between md:gap-2 lg:justify-start">
         <label className="items-center flex">
           Adults:
           <input
@@ -80,6 +85,7 @@ export const SearchBar = () => {
           />
         </label>
       </div>
+
       <div>
         <DatePicker
           selected={checkIn}
@@ -108,7 +114,7 @@ export const SearchBar = () => {
           wrapperClassName="min-w-full"
         />
       </div>
-      <div className="flex gap-1">
+      <div className="flex gap-1 ">
         <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
           Search
         </button>
