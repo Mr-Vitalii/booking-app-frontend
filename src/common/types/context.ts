@@ -3,6 +3,7 @@ import { Stripe } from "@stripe/stripe-js";
 
 export type AppContext = {
   showToast: (toastMessage: ToastMessage) => void;
+  isLoading: boolean;
   isLoggedIn: boolean;
   stripePromise: Promise<Stripe | null>;
 };

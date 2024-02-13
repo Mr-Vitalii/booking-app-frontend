@@ -1,5 +1,6 @@
 import { FacilitiesFilter } from "@/components/FacilitiesFilter";
 import { HotelTypesFilter } from "@/components/HotelTypesFilter";
+import { Loader } from "@/components/Loader";
 import { Pagination } from "@/components/Pagination";
 import { PriceFilter } from "@/components/PriceFilter";
 import { SearchResultsCard } from "@/components/SearchResultsCard";
@@ -33,8 +34,9 @@ export const Search = () => {
     sortOption,
   };
 
-  const { data: hotelData } = useQuery(["searchHotels", searchParams], () =>
-    apiClient.searchHotels(searchParams)
+  const { data: hotelData, isLoading } = useQuery(
+    ["searchHotels", searchParams],
+    () => apiClient.searchHotels(searchParams)
   );
 
   const handelStarsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,43 +96,47 @@ export const Search = () => {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-5">
-        <div className="flex justify-between items-center">
-          <span className="text-xl font-bold">
-            {hotelData?.pagination.total} Hotels found
-            {search.destination ? ` in ${search.destination}` : ""}
-          </span>
-          <select
-            value={sortOption}
-            onChange={(event) => setSortOption(event.target.value)}
-            className="p-2 border rounded-md"
-          >
-            <option value="">Sort By</option>
-            <option value="starRating">Star Rating</option>
-            <option value="pricePerNightAsc">
-              Price Per Night (low to high)
-            </option>
-            <option value="pricePerNightDesc">
-              Price Per Night (high to low)
-            </option>
-          </select>
-        </div>
-        <ul>
-          {hotelData?.data.map((hotel) => (
-            <li key={hotel._id} className="mb-3">
-              <SearchResultsCard hotel={hotel} />
-            </li>
-          ))}
-        </ul>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="flex flex-col gap-5">
+          <div className="flex justify-between items-center">
+            <span className="text-xl font-bold">
+              {hotelData?.pagination.total} Hotels found
+              {search.destination ? ` in ${search.destination}` : ""}
+            </span>
+            <select
+              value={sortOption}
+              onChange={(event) => setSortOption(event.target.value)}
+              className="p-2 border rounded-md"
+            >
+              <option value="">Sort By</option>
+              <option value="starRating">Star Rating</option>
+              <option value="pricePerNightAsc">
+                Price Per Night (low to high)
+              </option>
+              <option value="pricePerNightDesc">
+                Price Per Night (high to low)
+              </option>
+            </select>
+          </div>
+          <ul>
+            {hotelData?.data.map((hotel) => (
+              <li key={hotel._id} className="mb-3">
+                <SearchResultsCard hotel={hotel} />
+              </li>
+            ))}
+          </ul>
 
-        <div>
-          <Pagination
-            page={hotelData?.pagination.page || 1}
-            pages={hotelData?.pagination.pages || 1}
-            onPageChange={(page) => setPage(page)}
-          />
+          <div>
+            <Pagination
+              page={hotelData?.pagination.page || 1}
+              pages={hotelData?.pagination.pages || 1}
+              onPageChange={(page) => setPage(page)}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
