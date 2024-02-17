@@ -7,7 +7,7 @@ export type UserType = {
 };
 
 export type UserGoogleType = {
-  name: string;
-  email: string;
-  photo: string;
+  name: string | null;
+  email: string | null;
+  photo: string | null;
 };

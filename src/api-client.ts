@@ -1,7 +1,7 @@
 import { RegisterFormData, SignInFormData } from "@/common/types/auth";
 import { HotelType } from "@/common/types/hotel";
 import { HotelSearchResponse, SearchParams } from "@/common/types/search";
-import { UserType } from "@/common/types/user";
+import { UserGoogleType, UserType } from "@/common/types/user";
 import { BookingFormData, PaymentIntentResponse } from "@/common/types/booking";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
