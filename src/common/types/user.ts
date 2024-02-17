@@ -5,3 +5,9 @@ export type UserType = {
   firstName: string;
   lastName: string;
 };
+
+export type UserGoogleType = {
+  name: string;
+  email: string;
+  photo: string;
+};
