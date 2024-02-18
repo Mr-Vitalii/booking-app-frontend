@@ -10,7 +10,11 @@ export const MyBookings = () => {
   );
 
   if (!hotels || hotels.length === 0) {
-    return <span>No bookings found</span>;
+    return (
+      <h2 className="text-xl font-bold text-center">
+        You don't have any hotels booked yet
+      </h2>
+    );
   }
   return (
     <>

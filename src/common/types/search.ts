@@ -48,3 +48,13 @@ export type PriceFilterProps = {
   selectedPrice?: number;
   onChange: (value?: number) => void;
 };
+
+export type sortOptionsType = {
+  id: number;
+  name: string;
+  value: string;
+};
+
+export type SelectMenuProps = {
+  setSortOption: (value: string) => void;
+};

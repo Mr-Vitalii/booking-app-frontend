@@ -7,6 +7,7 @@ import Toast from "@/components/Toast";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 import { loadStripe } from "@stripe/stripe-js";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 const STRIPE_PUB_KEY = import.meta.env.VITE_STRIPE_PUB_KEY || "";
 
@@ -20,6 +21,8 @@ export const AppContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
+
+  const isAboveMediumScreens = useMediaQuery("(min-width: 1024px)");
 
   const [isError, setIsError] = useState<boolean>(true);
 
@@ -42,6 +45,7 @@ export const AppContextProvider = ({
         isLoading,
         isLoggedIn: !isError,
         stripePromise,
+        isAboveMediumScreens,
       }}
     >
       {toast && (
