@@ -14,14 +14,14 @@ export const MyHotels = () => {
     }
   );
 
-  if (!HotelData) {
-    return <span>No Hotel found</span>;
-  }
+  // if (!HotelData) {
+  //   return <span>No Hotel found</span>;
+  // }
   return (
     <>
       {isLoading ? (
         <Loader />
-      ) : (
+      ) : HotelData && HotelData.length > 0 ? (
         <div className="space-y-5">
           <span className="flex justify-between">
             <h1 className="text-3xl font-bold">My Hotels</h1>
@@ -74,6 +74,10 @@ export const MyHotels = () => {
             ))}
           </div>
         </div>
+      ) : (
+        <h2 className="text-xl font-bold text-center">
+          You haven't added any hotels yet
+        </h2>
       )}
     </>
   );

@@ -26,3 +26,21 @@ export const hotelFacilities = [
   "Spa",
   "Fitness Center",
 ];
+
+export const hotelSortOptions = [
+  {
+    id: 1,
+    name: "Star Rating",
+    value: "starRating",
+  },
+  {
+    id: 2,
+    name: "Price Per Night (low to high)",
+    value: "pricePerNightAsc",
+  },
+  {
+    id: 3,
+    name: "Price Per Night (high to low)",
+    value: "pricePerNightDesc",
+  },
+];

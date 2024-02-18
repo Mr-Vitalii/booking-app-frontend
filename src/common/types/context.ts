@@ -6,6 +6,7 @@ export type AppContext = {
   isLoading: boolean;
   isLoggedIn: boolean;
   stripePromise: Promise<Stripe | null>;
+  isAboveMediumScreens: boolean;
 };
 
 export type SearchContext = {

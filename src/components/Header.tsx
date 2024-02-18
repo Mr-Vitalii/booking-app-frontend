@@ -5,11 +5,9 @@ import { MobileMenu } from "./MobileMenu";
 import { SignOutButton } from "./SignOutButton";
 import { IoClose } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
-import useMediaQuery from "../hooks/useMediaQuery";
 
 export const Header = () => {
-  const { isLoggedIn } = useAppContext();
-  const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
+  const { isLoggedIn, isAboveMediumScreens } = useAppContext();
 
   const [open, setOpen] = useState(false);
 

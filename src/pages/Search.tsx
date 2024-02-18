@@ -1,24 +1,34 @@
+import * as React from "react";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { IoClose } from "react-icons/io5";
 import { FacilitiesFilter } from "@/components/FacilitiesFilter";
 import { HotelTypesFilter } from "@/components/HotelTypesFilter";
 import { Loader } from "@/components/Loader";
 import { Pagination } from "@/components/Pagination";
 import { PriceFilter } from "@/components/PriceFilter";
 import { SearchResultsCard } from "@/components/SearchResultsCard";
+import { SelectMenu } from "@/components/SelectMenu";
 import { StarRatingFilter } from "@/components/StarRatingFilter";
+import { useAppContext } from "@/contexts/AppContext";
 import { useSearchContext } from "@/contexts/SearchContext";
-import * as React from "react";
-import { useState } from "react";
-import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 
 export const Search = () => {
   const search = useSearchContext();
+  const { isAboveMediumScreens } = useAppContext();
   const [page, setPage] = useState<number>(1);
   const [selectedStars, setSelectedStars] = useState<string[]>([]);
   const [selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
   const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
   const [sortOption, setSortOption] = useState<string>("");
+
+  const [filterHidden, setFilterHidden] = useState<boolean>(false);
+
+  const showFilter = () => {
+    setFilterHidden(!filterHidden);
+  };
 
   const searchParams = {
     destination: search.destination,
@@ -72,12 +82,25 @@ export const Search = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-      <div className="rounded-lg border border-sky-600 bg-sky-100 h-fit sticky top-10">
+    <div className="grid grid-cols-1 relative lg:grid-cols-[250px_1fr] gap-5">
+      <div
+        className={`rounded-lg border border-sky-600 bg-sky-100 absolute top-[128px] h-[40vh] w-full overflow-y-auto  ${
+          filterHidden ? "hidden" : "visible"
+        } lg:sticky lg:h-[20%]
+        `}
+      >
         <div className="space-y-5 p-3">
-          <h3 className="text-lg font-semibold border-b border-sky-600 pb-5">
-            Filter by:
-          </h3>
+          <span className="flex justify-between">
+            <h3 className="text-lg font-semibold border-b border-sky-600 pb-5">
+              Filter by:
+            </h3>
+            {!isAboveMediumScreens && (
+              <button onClick={showFilter}>
+                <IoClose size={20} />
+              </button>
+            )}
+          </span>
+
           <StarRatingFilter
             selectedStars={selectedStars}
             onChange={handelStarsChange}
@@ -100,25 +123,23 @@ export const Search = () => {
         <Loader />
       ) : (
         <div className="flex flex-col gap-5">
-          <div className="flex justify-between items-center">
-            <span className="text-xl font-bold">
+          <div className="grid grid-cols-2 gap-3 lg:flex lg:justify-between lg:items-center">
+            <span className="col-start-1 col-end-3 text-xl font-bold">
               {hotelData?.pagination.total} Hotels found
               {search.destination ? ` in ${search.destination}` : ""}
             </span>
-            <select
-              value={sortOption}
-              onChange={(event) => setSortOption(event.target.value)}
-              className="p-2 border rounded-md"
-            >
-              <option value="">Sort By</option>
-              <option value="starRating">Star Rating</option>
-              <option value="pricePerNightAsc">
-                Price Per Night (low to high)
-              </option>
-              <option value="pricePerNightDesc">
-                Price Per Night (high to low)
-              </option>
-            </select>
+            {!isAboveMediumScreens && (
+              <div>
+                <p className="mb-3 text-sm font-medium">Filter by:</p>
+                <button
+                  onClick={showFilter}
+                  className="bg-white py-1.5 px-2 rounded-md w-full"
+                >
+                  Filter
+                </button>
+              </div>
+            )}
+            <SelectMenu setSortOption={setSortOption} />
           </div>
           <ul>
             {hotelData?.data.map((hotel) => (
