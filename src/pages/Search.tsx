@@ -2,6 +2,13 @@ import * as React from "react";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { IoClose } from "react-icons/io5";
+
+import { useAppContext } from "@/contexts/AppContext";
+import { useSearchContext } from "@/contexts/SearchContext";
+
+import { hotelSortOptions } from "@/config/hotel-options-config";
+import { sortOptionsType } from "@/common/types/search";
+
 import { FacilitiesFilter } from "@/components/FacilitiesFilter";
 import { HotelTypesFilter } from "@/components/HotelTypesFilter";
 import { Loader } from "@/components/Loader";
@@ -10,8 +17,6 @@ import { PriceFilter } from "@/components/PriceFilter";
 import { SearchResultsCard } from "@/components/SearchResultsCard";
 import { SelectMenu } from "@/components/SelectMenu";
 import { StarRatingFilter } from "@/components/StarRatingFilter";
-import { useAppContext } from "@/contexts/AppContext";
-import { useSearchContext } from "@/contexts/SearchContext";
 import * as apiClient from "../api-client";
 
 export const Search = () => {
@@ -23,6 +28,10 @@ export const Search = () => {
   const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
   const [sortOption, setSortOption] = useState<string>("");
+
+  const [selected, setSelected] = useState<sortOptionsType>(
+    hotelSortOptions[0]
+  );
 
   const [filterHidden, setFilterHidden] = useState<boolean>(false);
 
@@ -139,7 +148,12 @@ export const Search = () => {
                 </button>
               </div>
             )}
-            <SelectMenu setSortOption={setSortOption} />
+            <SelectMenu
+              setSortOption={setSortOption}
+              selected={selected}
+              setSelected={setSelected}
+              hotelSortOptions={hotelSortOptions}
+            />
           </div>
           <ul>
             {hotelData?.data.map((hotel) => (

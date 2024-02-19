@@ -57,4 +57,7 @@ export type sortOptionsType = {
 
 export type SelectMenuProps = {
   setSortOption: (value: string) => void;
+  selected: sortOptionsType;
+  setSelected: (value: sortOptionsType) => void;
+  hotelSortOptions: sortOptionsType[];
 };

@@ -1,27 +1,29 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { FaCheck } from "react-icons/fa6";
 import { HiChevronUpDown } from "react-icons/hi2";
-import { hotelSortOptions } from "@/config/hotel-options-config";
-import { SelectMenuProps, sortOptionsType } from "@/common/types/search";
+
+import { SelectMenuProps } from "@/common/types/search";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const SelectMenu = ({ setSortOption }: SelectMenuProps) => {
-  const [selected, setSelected] = useState<sortOptionsType>(
-    hotelSortOptions[0]
-  );
-
-  useEffect(() => {
-    setSortOption(selected.value);
-  }, [selected, setSortOption]);
+export const SelectMenu = ({
+  setSortOption,
+  selected,
+  setSelected,
+  hotelSortOptions,
+}: SelectMenuProps) => {
+  const handleChange = (sortOption: any) => {
+    setSortOption(sortOption.value);
+    setSelected(sortOption);
+  };
 
   return (
     <Listbox
       value={selected}
-      onChange={setSelected}
+      onChange={(sortOption) => handleChange(sortOption)}
       className="sm:min-w-[250px]"
     >
       {({ open }) => (
