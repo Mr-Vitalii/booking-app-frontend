@@ -23,6 +23,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.18.0",
     "stripe": "^14.15.0",
+    "swiper": "^11.0.6",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
