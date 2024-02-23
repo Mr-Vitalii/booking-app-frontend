@@ -106,9 +106,17 @@ export const MyHotels = () => {
           </div>
         </div>
       ) : (
-        <h2 className="text-xl font-bold text-center">
-          You haven't added any hotels yet
-        </h2>
+        <div className="flex flex-col gap-4 items-center">
+          <h2 className="text-xl font-bold text-center">
+            You haven't added any hotels yet
+          </h2>
+          <Link
+            to="/add-hotel"
+            className="flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500"
+          >
+            Add Hotel
+          </Link>
+        </div>
       )}
     </>
   );
