@@ -1,22 +1,44 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 import { BsBuilding, BsMap } from "react-icons/bs";
 import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
+import { MdDeleteForever } from "react-icons/md";
 import * as apiClient from "../api-client";
 import { Loader } from "@/components/Loader";
+import { useAppContext } from "@/contexts/AppContext";
 
 export const MyHotels = () => {
+  const { showToast } = useAppContext();
+  const queryClient = useQueryClient();
+
   const { data: HotelData, isLoading } = useQuery(
     "fetchMyHotels",
     apiClient.fetchMyHotels,
     {
-      onError: () => {},
+      onError: (error) => {
+        console.error("An error occurred:", error);
+      },
     }
   );
 
-  // if (!HotelData) {
-  //   return <span>No Hotel found</span>;
-  // }
+  const deleteHotelMutation = useMutation(apiClient.deleteMyHotel, {
+    onSuccess: () => {
+      showToast({ message: "Hotel deleted!", type: "SUCCESS" });
+      queryClient.invalidateQueries("fetchMyHotels");
+    },
+    onError: () => {
+      showToast({ message: "Error deleting Hotel", type: "ERROR" });
+    },
+  });
+
+  const handleDeleteHotel = async (hotelId: string) => {
+    try {
+      await deleteHotelMutation.mutateAsync(hotelId);
+    } catch (error) {
+      console.error("An error occurred while deleting the hotel:", error);
+    }
+  };
+
   return (
     <>
       {isLoading ? (
@@ -62,14 +84,23 @@ export const MyHotels = () => {
                     {hotel.starRating} Star Rating
                   </div>
                 </div>
-                <span className="flex justify-end">
-                  <Link
-                    to={`/edit-hotel/${hotel._id}`}
-                    className="flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500"
+                <div className="flex justify-end items-center gap-3">
+                  <button
+                    onClick={() => handleDeleteHotel(hotel._id)}
+                    className="flex items-center bg-red-600 text-white font-bold p-2 hover:bg-red-500 sm:text-xl"
                   >
-                    View Details
-                  </Link>
-                </span>
+                    <MdDeleteForever />
+                    <span>Delete hotel</span>
+                  </button>
+                  <span>
+                    <Link
+                      to={`/edit-hotel/${hotel._id}`}
+                      className="flex bg-blue-600 text-white font-bold p-2 hover:bg-blue-500 sm:text-xl"
+                    >
+                      View Details
+                    </Link>
+                  </span>
+                </div>
               </div>
             ))}
           </div>
